@@ -21,12 +21,12 @@ from post.views import *
 
 router = routers.SimpleRouter()
 router.register(r'auto', AutoViewSet)
+router.register(r'house', HouseViewSet, basename='house')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
-
-    path('api/v1/houselist/', HouseApiView.as_view())
+    path('api/v1/', include(router.urls))
 
 ]

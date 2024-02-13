@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+User = get_user_model()
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -80,6 +82,7 @@ class Auto(models.Model):
     price = models.DecimalField(verbose_name='Цена', max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     location = models.CharField(verbose_name='локация', max_length=100, choices=LOCATION_CHOICES)
     ranting = models.CharField(verbose_name='аренда', max_length=60, choices=RANTING_CHOICE)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return f'{self.mark}, {self.model}, {self.year}, {self.price}'
@@ -125,6 +128,7 @@ class House(models.Model):
     square = models.IntegerField(verbose_name='Площадь(м2)')
     floor = models.IntegerField(verbose_name='Этаж', validators=[MinValueValidator(1), MaxValueValidator(15)])
     year_of_buildings = models.CharField(verbose_name='Год постройки', max_length=100, choices=YEAR_OF_BUILDINGS)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.name

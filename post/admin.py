@@ -3,5 +3,5 @@ from .models import Auto, Category, House
 
 admin.site.register(Auto)
 admin.site.register(House)
-# admin.site.register(Category)
+admin.site.register(Category)
 
