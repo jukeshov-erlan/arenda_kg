@@ -1,10 +1,16 @@
-from rest_framework import generics
-from .models import Auto, House, Category
+from rest_framework import generics, viewsets
 from .serializers import *
 
-class AutoApiView(generics.ListAPIView):
+class AutoViewSet(viewsets.ModelViewSet):
     queryset = Auto.objects.all()
     serializer_class = AutoSerializer
+
+
+
+
+# class AutoApiList(generics.ListCreateAPIView):
+#     queryset = Auto.objects.all()
+#     serializer_class = AutoSerializer
 
 class HouseApiView(generics.ListAPIView):
     queryset = House.objects.all()

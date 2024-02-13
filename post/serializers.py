@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import *
-from .serializers import *
 
 class AutoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,4 +10,4 @@ class AutoSerializer(serializers.ModelSerializer):
 class HouseSerializer(serializers.ModelSerializer):
     class Meta:
         model = House
-        fields = '__all__'
+        fields = ('name', 'location', 'price', 'price_currency')
