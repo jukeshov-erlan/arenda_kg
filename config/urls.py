@@ -25,6 +25,7 @@ router.register(r'auto', AutoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/arenda-auth/', include('rest_framework.urls')),
     path('api/v1/', include(router.urls)),
     
     path('api/v1/house/', HouseAPIList.as_view()),
