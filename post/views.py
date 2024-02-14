@@ -28,7 +28,7 @@ class HouseAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = House.objects.all()
     serializer_class = HouseSerializer
     permission_classes = (IsAuthenticated, )
-    authentication_classes = (TokenAuthentication)
+    # authentication_classes = (TokenAuthentication)
 
 class HouseAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = House.objects.all()
