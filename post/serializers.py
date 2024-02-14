@@ -8,6 +8,7 @@ class AutoSerializer(serializers.ModelSerializer):
 
 
 class HouseSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = House
-        fields = ('name', 'location', 'price', 'price_currency')
+        fields = ('name', 'location', 'price', 'price_currency', 'user')

@@ -82,7 +82,7 @@ class Auto(models.Model):
     price = models.DecimalField(verbose_name='Цена', max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     location = models.CharField(verbose_name='локация', max_length=100, choices=LOCATION_CHOICES)
     ranting = models.CharField(verbose_name='аренда', max_length=60, choices=RANTING_CHOICE)
-    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.mark}, {self.model}, {self.year}, {self.price}'
@@ -125,10 +125,10 @@ class House(models.Model):
     price_currency = models.CharField(verbose_name='Цена в', max_length=20, choices=CURRENCY_CHOICES)
     price = models.DecimalField(verbose_name='Цена', max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     number_of_rooms = models.CharField(verbose_name='Количество комнат',max_length=100, choices=NUMBER_OF_ROOMS)
-    square = models.IntegerField(verbose_name='Площадь(м2)')
+    square = models.IntegerField(verbose_name='Площадь(м2)', null=False)
     floor = models.IntegerField(verbose_name='Этаж', validators=[MinValueValidator(1), MaxValueValidator(15)])
     year_of_buildings = models.CharField(verbose_name='Год постройки', max_length=100, choices=YEAR_OF_BUILDINGS)
-    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
