@@ -1,8 +1,9 @@
 from rest_framework import viewsets, generics
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
 from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from rest_framework.authentication import TokenAuthentication
 from .serializers import *
 
 class AutoViewSet(viewsets.ModelViewSet):
@@ -26,7 +27,8 @@ class HouseAPIList(generics.ListCreateAPIView):
 class HouseAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = House.objects.all()
     serializer_class = HouseSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (TokenAuthentication)
 
 class HouseAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = House.objects.all()
