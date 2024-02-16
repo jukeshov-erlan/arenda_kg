@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import logging
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -157,3 +159,29 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'eraline1990@gmail.com'
 EMAIL_HOST_PASSWORD = 'eqqcvyersteytzgj'
+
+
+
+
+
+
+# Уровень логирования: DEBUG, INFO, WARNING, ERROR, CRITICAL
+LOG_LEVEL = os.environ.get('LOG_LEVEL', 'DEBUG')
+
+# Создание папки log внутри вашего проекта, если ее нет
+LOGGING_DIR = os.path.join(BASE_DIR, 'log')
+if not os.path.exists(LOGGING_DIR):
+    os.makedirs(LOGGING_DIR)
+
+# Путь к файлу лога
+LOG_FILE_PATH = os.path.join(LOGGING_DIR, 'app.log')
+
+# Настройка логгера
+logging.basicConfig(
+    level=LOG_LEVEL,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler(LOG_FILE_PATH),
+        logging.StreamHandler(),
+    ]
+)

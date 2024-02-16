@@ -2,11 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import RegistrationSerializer, ActivationSerializer, LoginSerializer, ChangePasswordSerializer, ForgotPasswordSerializer, ForgotPasswordCompleteSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
-# from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from drf_yasg.utils import swagger_auto_schema
-
+import logging
 
 class RegistrationView(APIView):
     @swagger_auto_schema(request_body=RegistrationSerializer())
@@ -73,3 +72,15 @@ class ForgotPasswordCompleteView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.set_new_password()
         return Response('Пароль успешно изменен', status=200)
+    
+
+
+logger = logging.getLogger(__name__)
+
+def some_function():
+    try:
+        # Ваш код здесь
+        logger.info("Функция успешно выполнена")
+    except Exception as e:
+        # Регистрация ошибки
+        logger.error(f"Произошла ошибка: {e}", exc_info=True)
